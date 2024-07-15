@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import ApolloProviderWrapper from "@/components/ApolloProvider";
 
 export const metadata: Metadata = {
   title: "Chatbot AI",
@@ -13,10 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className="flex min-h-screen">{children}</body>
-      </html>
-    </ClerkProvider>
+    <ApolloProviderWrapper>
+      <ClerkProvider>
+        <html lang="en">
+          <body className="flex min-h-screen">{children}</body>
+        </html>
+      </ClerkProvider>
+    </ApolloProviderWrapper>
   );
 }
