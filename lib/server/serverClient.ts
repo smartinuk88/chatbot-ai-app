@@ -20,10 +20,10 @@ const defaultOptions: DefaultOptions = {
   },
 };
 
-const serverClient = new ApolloClient({
+export const serverClient = new ApolloClient({
   ssrMode: true,
   link: new HttpLink({
-    uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+    uri: "https://flatval.eu-central-a.ibm.stepzen.net/api/mortal-puffin/__graphql",
     headers: {
       Authorization: `Apikey ${process.env.GRAPHQL_TOKEN}`,
     },
@@ -32,5 +32,3 @@ const serverClient = new ApolloClient({
   cache: new InMemoryCache(),
   defaultOptions,
 });
-
-export default serverClient;

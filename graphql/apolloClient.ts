@@ -8,7 +8,9 @@ import {
 export const BASE_URL =
   process.env.NODE_ENV !== "development"
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "https://localhost:3000";
+    : "http://localhost:3000";
+
+console.log("CLIENT DEBUG 1 >>> GraphQL URL is ", `${BASE_URL}/api/graphql`);
 
 const httpLink = createHttpLink({
   uri: `${BASE_URL}/api/graphql`, // Point to the new API route

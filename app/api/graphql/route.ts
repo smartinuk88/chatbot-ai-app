@@ -1,4 +1,4 @@
-import serverClient from "@/lib/server/serverClient";
+import { serverClient } from "@/lib/server/serverClient";
 import { gql } from "@apollo/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,6 +11,9 @@ const corsHeaders = {
 export async function POST(request: NextRequest) {
   const { query, variables } = await request.json();
 
+  console.log("DEBUG 1", query);
+  console.log("DEBUG 2", variables);
+
   try {
     let result;
 
@@ -22,6 +25,8 @@ export async function POST(request: NextRequest) {
         `,
         variables,
       });
+
+      console.log("DEBUG 3:", result);
     } else {
       // Handle queries
       result = await serverClient.query({
