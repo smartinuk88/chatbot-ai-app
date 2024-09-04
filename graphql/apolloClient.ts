@@ -10,8 +10,6 @@ export const BASE_URL =
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : "http://localhost:3000";
 
-console.log("CLIENT DEBUG 1 >>> GraphQL URL is ", `${BASE_URL}/api/graphql`);
-
 const httpLink = createHttpLink({
   uri: `${BASE_URL}/api/graphql`, // Point to the new API route
 });
