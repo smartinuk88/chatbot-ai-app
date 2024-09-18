@@ -9,6 +9,17 @@ export const CREATE_CHATBOT = gql`
   }
 `;
 
+export const UPDATE_CHATBOT = gql`
+  mutation UpdateChatbot($id: Int!, $name: String!) {
+    updateChatbots(id: $id, name: $name) {
+      id
+      name
+      created_at
+      # Add other fields you might want to return after update
+    }
+  }
+`;
+
 export const DELETE_CHATBOT = gql`
   mutation DeleteChatbot($id: Int!) {
     deleteChatbots(id: $id) {

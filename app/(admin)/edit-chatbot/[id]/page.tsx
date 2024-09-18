@@ -5,7 +5,11 @@ import Characteristic from "@/components/Characteristic";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BASE_URL } from "@/graphql/apolloClient";
-import { ADD_CHARACTERISTIC, DELETE_CHATBOT } from "@/graphql/mutations";
+import {
+  ADD_CHARACTERISTIC,
+  DELETE_CHATBOT,
+  UPDATE_CHATBOT,
+} from "@/graphql/mutations";
 import { GET_CHATBOT_BY_ID } from "@/graphql/queries";
 import { GetChatbotByIdResponse, GetChatbotByIdVariables } from "@/types/types";
 import { useMutation, useQuery } from "@apollo/client";
@@ -21,6 +25,10 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
   const [newCharacteristic, setNewCharacteristic] = useState<string>("");
 
   const [addCharacteristic] = useMutation(ADD_CHARACTERISTIC, {
+    refetchQueries: ["GetChatbotById"],
+  });
+
+  const [updateChatbot] = useMutation(UPDATE_CHATBOT, {
     refetchQueries: ["GetChatbotById"],
   });
 
@@ -68,6 +76,27 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
       console.log("Response from mutation:", response);
     } catch (err) {
       console.error("Failed to add characteristic:", err);
+    }
+  };
+
+  const handleUpdateChatbot = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const promise = updateChatbot({
+        variables: {
+          id,
+          name: chatbotName,
+        },
+      });
+
+      toast.promise(promise, {
+        loading: "Updating...",
+        success: "Chatbot name sucessfully updated!",
+        error: "Failed to update chatbot name",
+      });
+    } catch (err) {
+      console.error("Failed to update chatbot:", error);
     }
   };
 
@@ -140,7 +169,7 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
         <div className="flex space-x-4">
           <Avatar seed={chatbotName} />
           <form
-            // onSubmit={handleUpdateChatbot}
+            onSubmit={handleUpdateChatbot}
             className="flex flex-1 space-x-2 items-center"
           >
             <Input
