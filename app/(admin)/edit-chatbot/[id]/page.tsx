@@ -66,8 +66,8 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
 
       const response = await promise;
       console.log("Response from mutation:", response);
-    } catch (error) {
-      console.error("Failed to add characteristic:", error);
+    } catch (err) {
+      console.error("Failed to add characteristic:", err);
     }
   };
 
@@ -164,8 +164,9 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
           in your communications with customers and users
         </p>
 
-        <div>
+        <div className="bg-gray-200 p-5 rounded-md mt-5">
           <form
+            className="flex space-x-2 mb-5"
             onSubmit={(e) => {
               e.preventDefault();
               handleAddCharacteristic(newCharacteristic);

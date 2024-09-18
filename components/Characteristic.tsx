@@ -19,7 +19,7 @@ function Characteristic({
     try {
       await removeCharacteristic({
         variables: {
-          id: characteristicId,
+          characteristicId,
         },
       });
     } catch (error) {
@@ -28,7 +28,10 @@ function Characteristic({
   };
 
   return (
-    <li className="relative p-10 bg-white border rounded-md">
+    <li
+      key={characteristic.id}
+      className="relative p-10 bg-white border rounded-md"
+    >
       {characteristic.content}
       <OctagonX
         className="w-6 h-6 text-white fill-red-500 absolute top-1 right-1 cursor-pointer hover:opacity-50"
