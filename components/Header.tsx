@@ -5,7 +5,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 function Header() {
   return (
     <header className="flex justify-between bg-white shadow-sm text-gray-800 p-5">
-      <Link href="/" className="flex items-center font-thin text-4xl">
+      <Link href="/" className="flex space-x-2 items-center font-thin text-4xl">
         <Avatar seed="assistly" />
         <div className="space-y-1">
           <h1>Assistly</h1>
