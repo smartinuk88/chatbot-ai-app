@@ -1,6 +1,6 @@
 import Avatar from "@/components/Avatar";
 
-function loading() {
+function Loading() {
   return (
     <div className="mx-auto animate-spin p-10">
       <Avatar seed="assistly" />
@@ -8,4 +8,4 @@ function loading() {
   );
 }
 
-export default loading;
+export default Loading;
