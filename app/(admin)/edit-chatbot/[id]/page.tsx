@@ -122,7 +122,7 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
   if (loading)
     return (
       <div className="mx-auto animate-spin p-10">
-        <Avatar seed="Assistly Support Agent" />
+        <Avatar seed="assistly" />
       </div>
     );
 

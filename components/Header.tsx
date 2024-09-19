@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="flex justify-between bg-white shadow-sm text-gray-800 p-5">
       <Link href="/" className="flex items-center font-thin text-4xl">
-        <Avatar seed="PAPAFAM Support Agent" />
+        <Avatar seed="assistly" />
         <div className="space-y-1">
           <h1>Assistly</h1>
           <h2 className="text-sm">Your Customisable AI Chat Agent</h2>
