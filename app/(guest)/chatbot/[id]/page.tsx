@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import startNewChat from "@/lib/startNewChat";
 import { Message } from "@/types/types";
 import { useState } from "react";
 
@@ -23,11 +24,23 @@ function ChatbotPage({ params: { id } }: { params: { id: string } }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
 
+  const handleInformationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    const chatId = await startNewChat(name, email, Number(id));
+
+    setChatId(chatId);
+    setLoading(false);
+    setIsOpen(false);
+  };
+
   return (
     <div className="w-full flex bg-gray-100">
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[425px]">
-          <form>
+          <form onSubmit={handleInformationSubmit}>
             <DialogHeader>
               <DialogTitle>Lets help you out!</DialogTitle>
               <DialogDescription>
