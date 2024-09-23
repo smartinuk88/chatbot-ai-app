@@ -5,8 +5,8 @@ import ApolloProviderWrapper from "@/components/ApolloProvider";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Chatbot AI",
-  description: "A customised AI Chatbot app created with Next.js",
+  title: "botify",
+  description: "A customisable AI chatbot creation app created with Next.js",
 };
 
 export default function RootLayout({
