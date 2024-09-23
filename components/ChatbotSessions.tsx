@@ -52,7 +52,7 @@ function ChatbotSessions({ chatbots }: { chatbots: Chatbot[] }) {
                       <Link
                         href={`/review-sessions/${session.id}`}
                         key={session.id}
-                        className="relative p-10 bg-[#2991EE] text-white rounded-md block"
+                        className="relative p-10 bg-[#e57373] text-white rounded-md block"
                       >
                         <p className="text-lg font-bold">
                           {session.guests?.name || "Anonymous"}

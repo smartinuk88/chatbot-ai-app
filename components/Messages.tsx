@@ -44,17 +44,17 @@ function Messages({
               {isSender ? (
                 <Avatar
                   seed={chatBotName}
-                  className="h-12 w-12 bg-white rounded-full border-2 border-[#2991EE]"
+                  className="h-12 w-12 bg-white rounded-full border-2 border-[#e57373]"
                 />
               ) : (
-                <UserCircle className="text-[#2991EE]" />
+                <UserCircle className="text-[#e57373]" />
               )}
             </div>
 
             <p
               className={`chat-bubble text-white ${
                 isSender
-                  ? "chat-bubble-primary bg-[#4D7DFB]"
+                  ? "chat-bubble-primary bg-[#e57373]"
                   : "chat-bubble-secondary bg-gray-200 text-gray-700"
               }`}
             >

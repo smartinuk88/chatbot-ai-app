@@ -49,7 +49,7 @@ async function ViewChatbots() {
             create one.
           </p>
           <Link href="/create-chatbot">
-            <Button className="bg-[#64B5F5] text-white p-3 rounded-md mt-5">
+            <Button className="bg-[#e57373] text-white p-3 rounded-md mt-5">
               Create Chatbot
             </Button>
           </Link>

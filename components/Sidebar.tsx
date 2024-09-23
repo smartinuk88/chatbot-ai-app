@@ -8,7 +8,7 @@ function Sidebar() {
         <li className="flex-1">
           <Link
             href="/create-chatbot"
-            className="flex flex-col text-center lg:text-left lg:flex-row items-center gap-2 p-5 rounded-md bg-[#2991EE] hover:opacity-50"
+            className="flex flex-col text-center lg:text-left lg:flex-row items-center gap-2 p-5 rounded-md bg-[#e57373] hover:opacity-50"
           >
             <BotMessageSquare className="h-6 w-6 lg:h-8 lg:w-8" />
             <div className="hidden md:inline">
@@ -20,7 +20,7 @@ function Sidebar() {
         <li className="flex-1">
           <Link
             href="/view-chatbots"
-            className="flex flex-col text-center lg:text-left lg:flex-row items-center gap-2 p-5 rounded-md bg-[#2991EE] hover:opacity-50"
+            className="flex flex-col text-center lg:text-left lg:flex-row items-center gap-2 p-5 rounded-md bg-[#e57373] hover:opacity-50"
           >
             <PencilLine className="h-6 w-6 lg:h-8 lg:w-8" />
             <div className="hidden md:inline">
@@ -32,7 +32,7 @@ function Sidebar() {
         <li className="flex-1">
           <Link
             href="/review-sessions"
-            className="flex flex-col text-center lg:text-left lg:flex-row items-center gap-2 p-5 rounded-md bg-[#2991EE] hover:opacity-50"
+            className="flex flex-col text-center lg:text-left lg:flex-row items-center gap-2 p-5 rounded-md bg-[#e57373] hover:opacity-50"
           >
             <SearchIcon className="h-6 w-6 lg:h-8 lg:w-8" />
             <div className="hidden md:inline">

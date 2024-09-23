@@ -122,7 +122,7 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
   if (loading)
     return (
       <div className="mx-auto animate-spin p-10">
-        <Avatar seed="assistly" />
+        <Avatar seed="botify" />
       </div>
     );
 
@@ -132,7 +132,7 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
 
   return (
     <div className="px-0 md:p-10">
-      <div className="md:sticky md:top-0 z-50 sm:max-w-sm ml-auto space-y-2 md:border p-5 rounded-b-lg md:rounded-lg bg-[#2991EE]">
+      <div className="md:sticky md:top-0 z-50 sm:max-w-sm ml-auto space-y-2 md:border p-5 rounded-b-lg md:rounded-lg bg-[#e57373]">
         <h2 className="text-white text-sm font-bold">Link to Chat</h2>
         <p className="text-sm italic text-white">
           Share this link with your customers to start conversations with your

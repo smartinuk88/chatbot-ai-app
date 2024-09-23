@@ -216,7 +216,7 @@ function ChatbotPage({ params: { id } }: { params: { id: string } }) {
       </Dialog>
 
       <div className="flex flex-col w-full max-w-3xl mx-auto bg-white md:rounded-t-lg shadow-2xl md:mt-10">
-        <div className="pb-4 border-b sticky top-0  z-50 bg-[#4D7DFB] py-5 px-10 text-white md:rounded-t-lg flex items-center space-x-4">
+        <div className="pb-4 border-b sticky top-0  z-50 bg-[#ce6868] py-5 px-10 text-white md:rounded-t-lg flex items-center space-x-4">
           <Avatar
             seed={chatBotData?.chatbots.name!}
             className="h-12 w-12 bg-white rounded-full border-2 border-white"
