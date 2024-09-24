@@ -72,16 +72,16 @@ Embedding Chatbots:
 Share chatbot links with external users.
 Embed chatbots into external websites (future feature).
 ### **Future Roadmap**
-1. Automated Database Cleanup (CRON/Cloud Function)
+1. Automated Database Cleanup (CRON/Cloud Function): 
 The project aims to introduce a CRON job or cloud function that will periodically clean up the database by deleting old chat sessions. This will ensure efficient use of resources and keep the database optimized.
 
-2. Embed Chatbots into Websites
+2. Embed Chatbots into Websites: 
 The platform will include a feature that generates an embeddable script, allowing users to place their custom chatbots on their websites. This will make it easier for businesses to integrate AI-powered customer support into their platforms.
 
-3. Improved Chatbot Intelligence
+3. Improved Chatbot Intelligence: 
 Future iterations of the platform will integrate more advanced AI features, such as intent recognition and multi-turn conversations, to make the chatbots even more helpful and engaging.
 
-4. Enhanced Analytics Dashboard
+4. Enhanced Analytics Dashboard: 
 The admin dashboard will eventually include analytics tools to provide insights into chatbot performance, user interactions, and session metrics.
 
 ### **Contributing**
