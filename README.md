@@ -38,7 +38,7 @@ To set up the project locally:
 Clone the repository:
 
 ```js
-git clone https://github.com/your-repository/assistly.git
+git clone https://github.com/smartinuk88/chatbot-ai-app.git
 ```
 Install dependencies:
 
