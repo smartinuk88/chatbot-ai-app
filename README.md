@@ -37,26 +37,30 @@ To set up the project locally:
 
 Clone the repository:
 
-bash
-Copy code
+```js
 git clone https://github.com/your-repository/assistly.git
+```
 Install dependencies:
 
-bash
-Copy code
+```js
 npm install
+```
+
 Set up environment variables in a .env.local file:
 
+```js
 NEXT_PUBLIC_CLERK_FRONTEND_API
 NEXT_PUBLIC_GRAPHQL_ENDPOINT
 NEON_DATABASE_URL
 OPENAI_API_KEY
 GRAPHQL_TOKEN
+```
 Start the development server:
 
-bash
-Copy code
+```js
 npm run dev
+```
+
 The application will run locally at http://localhost:3000.
 
 ## **Usage**
