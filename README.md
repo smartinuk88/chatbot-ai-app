@@ -1,94 +1,163 @@
-# **botify - Chatbot Creator Platform**
+# Botify
 
-**botify** is a modern SaaS application that allows users to create and customize their own chatbots. With this platform, users can add personalized characteristics to their chatbots, interact with them through real-time chat sessions, and even embed them on external websites. **botify** integrates powerful technologies like OpenAI, StepZen, Neon, and Clerk to deliver an optimal and secure chatbot creation experience.
+An AI chatbot platform where admins create and configure custom AI 
+assistants via a dashboard, and end users interact with them through a 
+shareable chat interface.
 
----
-
-## **Features**
-
-### **Real-Time AI Conversations**
-Leverages the **OpenAI Completions API** to enable real-time, 1-on-1 chats with AI-powered agents. The AI provides intelligent and dynamic responses, ensuring users get immediate assistance.
-
-### **Admin Management with PostgreSQL & Neon**
-Stores chatbot prompts and admin details securely in a **PostgreSQL database** hosted by Neon. This setup ensures scalability and data consistency.
-
-### **GraphQL API via StepZen**
-Uses **StepZen** to introspect the PostgreSQL database and automatically generate a **GraphQL API**, allowing for efficient and flexible data querying and mutation.
-
-### **Clerk Authentication with Google OAuth**
-Integrates **Clerk** for secure user authentication, including **Google OAuth**. Admins can safely access their dashboards to create and manage chatbots, prompts, and chat histories.
-
-### **Chatbot Customization and Sharing**
-Provides an admin dashboard for creating new chatbots, customizing their characteristics, and generating unique shareable links. These links allow users to chat with the bot and assist them with their queries.
-
-### **Next.js Caching for Optimal Performance**
-Implements caching strategies in **Next.js** to ensure faster load times and a smoother user experience. Both server and client components are optimized for performance using caching techniques.
-
-### **Modern UI & UX**
-Utilizes **Shadcn** and **Tailwind CSS** for a clean, responsive, and beautiful user interface. This combination enhances the overall user experience, ensuring the platform is easy to navigate and use.
-
-### **TypeScript for Reliability**
-Written in **TypeScript** to reduce bugs and improve reliability across the platform.
+🔗 [Live Demo](https://chatbot-ai-creator-app.vercel.app/)
 
 ---
 
-### **Setup and Installation**
-To set up the project locally:
+## What it does
 
-Clone the repository:
+**For admins:**
+- Create multiple chatbots, each with a unique shareable link
+- Configure chatbot behaviour by building a system prompt — adding and removing 
+  pieces of knowledge or personality
+- Review all previous user chat sessions per chatbot from the dashboard
 
-```js
-git clone https://github.com/smartinuk88/chatbot-ai-app.git
-```
-Install dependencies:
+**For end users:**
+- Access a chatbot via its unique shareable link
+- Chat in real time with the AI assistant
+- No account required
 
-```js
+---
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router), TypeScript |
+| Auth | Clerk (Google OAuth) |
+| AI | OpenAI Completions API |
+| Database | PostgreSQL on Neon |
+| API Layer | GraphQL via StepZen |
+| UI | Shadcn/UI, Tailwind CSS |
+| Deployment | Vercel |
+
+---
+
+## How it works
+
+### Chatbot creation and configuration
+
+When an admin creates a chatbot:
+
+User sends a message via the shareable chat interface
+→ Conversation history fetched from PostgreSQL
+→ System prompt and full conversation history assembled into a prompt
+→ Prompt sent to OpenAI Completions API
+→ Response streamed back to the user
+→ Both the user message and AI response saved to PostgreSQL
+
+The system prompt is the key differentiator between chatbots — it defines the 
+AI's persona, knowledge, and constraints. An admin could create a customer 
+support bot, a product FAQ bot, and a sales assistant, each with a completely 
+different system prompt and behaviour.
+
+### Admin dashboard
+
+The dashboard gives admins visibility across all their chatbots:
+- Create and manage multiple chatbots
+- Edit system prompts at any time — changes take effect immediately
+- Review full chat session histories per chatbot — useful for understanding 
+  how users are interacting and identifying gaps in the system prompt
+
+---
+
+## Key Technical Decisions
+
+### GraphQL via StepZen
+Rather than writing a GraphQL API from scratch, StepZen introspects the 
+PostgreSQL schema and auto-generates a fully functional GraphQL API from it. 
+This means the data layer is defined once — in the database schema — and the 
+API reflects it automatically.
+
+GraphQL's single-endpoint querying model suits the dashboard well: a single 
+query can retrieve a chatbot, its system prompt, and its recent sessions in 
+one round trip, rather than the multiple REST calls that would be needed 
+otherwise.
+
+### Next.js Server and Client Components
+The dashboard pages — which display chatbot lists, session histories, and 
+prompts — are Server Components. They fetch data directly at render time 
+without client-side JavaScript overhead. The chat interface is a Client 
+Component, handling real-time message state and streaming responses 
+interactively.
+
+### Next.js caching for performance
+Next.js caching is used to avoid redundant data fetches — chatbot 
+configurations and system prompts are cached and only revalidated when the 
+admin makes changes. This keeps the chat interface fast for end users without 
+hitting the database on every message.
+
+### Clerk for authentication
+Clerk handles admin authentication with Google OAuth. End users accessing the 
+shareable chat link do not need to authenticate — the public/private split is 
+managed at the route level.
+
+### PostgreSQL on Neon
+All structured data — admin details, chatbot configurations, system prompts, 
+and chat history — lives in a relational PostgreSQL database hosted on Neon. 
+The relational model suits the data well: admins have many chatbots, chatbots 
+have many sessions, sessions have many messages.
+
+---
+
+## What I'd do differently
+
+This project was built as part of a structured learning programme. With my 
+current knowledge, the main changes I'd make are:
+
+- **Replace StepZen with a custom API layer** — StepZen is convenient for 
+  auto-generating a GraphQL API, but in a production environment you'd want 
+  explicit control over your resolvers, validation logic, and error handling. 
+  I'd replace it with a manually written GraphQL layer or simply use Prisma 
+  with Next.js API routes, which gives more flexibility and is easier to test.
+- **Add Prisma as the ORM** — direct SQL queries or a raw GraphQL layer without 
+  an ORM makes database interactions harder to type-check and maintain. Prisma 
+  would provide type-safe queries and schema-driven migrations.
+- **Add streaming to the chat interface** — the current implementation waits 
+  for the full OpenAI response before displaying it. Streaming the response 
+  token by token (using the OpenAI streaming API) would significantly improve 
+  the perceived responsiveness of the chat.
+- **Add rate limiting to the chat endpoint** — without rate limiting, the 
+  shareable chat link is an open endpoint that could be abused to run up 
+  OpenAI API costs. A simple rate limiter per session or IP would be essential 
+  in a real deployment.
+- **Add tests** — the chatbot creation flow, system prompt assembly, and chat 
+  history retrieval are all untested. These are exactly the kinds of business 
+  logic flows that benefit most from unit and integration tests.
+
+---
+
+## Running locally
+
+1. Clone the repository
+2. Install dependencies:
+```bash
 npm install
 ```
+3. Create a `.env.local` file with the following:
 
-Set up environment variables in a .env.local file:
+Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
 
-```js
-NEXT_PUBLIC_CLERK_FRONTEND_API
-NEXT_PUBLIC_GRAPHQL_ENDPOINT
-NEON_DATABASE_URL
-OPENAI_API_KEY
-GRAPHQL_TOKEN
-```
-Start the development server:
+OpenAI
+OPENAI_API_KEY=
 
-```js
+Neon PostgreSQL
+DATABASE_URL=
+
+StepZen
+STEPZEN_API_KEY=
+NEXT_PUBLIC_STEPZEN_API_URL=
+
+4. Start the development server:
+```bash
 npm run dev
 ```
 
-The application will run locally at http://localhost:3000.
-
-## **Usage**
-Admin Dashboard:
-Create and manage chatbots.
-Edit chatbot prompts and characteristics.
-View chat histories with users.
-Embedding Chatbots:
-Share chatbot links with external users.
-Embed chatbots into external websites (future feature).
-### **Future Roadmap**
-1. Automated Database Cleanup (CRON/Cloud Function): 
-The project aims to introduce a CRON job or cloud function that will periodically clean up the database by deleting old chat sessions. This will ensure efficient use of resources and keep the database optimized.
-
-2. Embed Chatbots into Websites: 
-The platform will include a feature that generates an embeddable script, allowing users to place their custom chatbots on their websites. This will make it easier for businesses to integrate AI-powered customer support into their platforms.
-
-3. Improved Chatbot Intelligence: 
-Future iterations of the platform will integrate more advanced AI features, such as intent recognition and multi-turn conversations, to make the chatbots even more helpful and engaging.
-
-4. Enhanced Analytics Dashboard: 
-The admin dashboard will eventually include analytics tools to provide insights into chatbot performance, user interactions, and session metrics.
-
-### **Contributing**
-Contributions are welcome! Feel free to fork the repository and create a pull request. Make sure to follow the code style and include appropriate documentation for any new features.
-
-### **License**
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
-Support
-For any issues, please open an issue in the repository or contact the project maintainer directly.
+> **Note:** You will need active accounts and API keys for Clerk, OpenAI, 
+> Neon, and StepZen to run the full application locally.
